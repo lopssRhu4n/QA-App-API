@@ -1,6 +1,6 @@
 from flask_cors import CORS, cross_origin
 from flask import Flask
-import users, posts, register
+import users, posts, login
 
 
 def create_app():
@@ -9,6 +9,6 @@ def create_app():
     
     users.configure(app)
     posts.configure(app)
-    register.configure(app)
+    login.configure(app)
      
     return app

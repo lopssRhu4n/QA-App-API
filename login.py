@@ -12,7 +12,7 @@ def LoginUser():
     users = db.getDb()
     for user in users:
         if (user.get('email') == credentials['email']) & (user.get('password') == credentials['password']):
-            return user.get('jwt')
+            return {"token": user.get('jwt'), "user": user.get('user')}
 
 @bp.route("/", methods=['GET'])
 def Teste():
