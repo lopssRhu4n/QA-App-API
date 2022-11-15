@@ -32,11 +32,17 @@ def editUser(id):
 @bp.route('/', methods=['POST'])
 def createNewUser():
     global users
-    user = request.get_json()
-    users.append(user)
-    users = db.setDb(users)
+    new_user = request.get_json()
+    for user in users:
+        if new_user.get("username") == user.get("username"):
+            return {"msg": "Username already used", "status": "error"} 
+        elif new_user.get("email") == user.get("email"):
+            return {"msg": "Email already used", "status": "error"}
+        else:
+            users.append(new_user)
+            users = db.setDb(users)
     
-    return jsonify(users)
+            return jsonify(new_user)
 
 @bp.route('/<int:id>', methods=['DELETE'])
 def deleteUser(id):

@@ -12,11 +12,11 @@ def LoginUser():
     users = db.getDb()
     for user in users:
         if (user.get('email') == credentials['email']) & (user.get('password') == credentials['password']):
-            return {"token": user.get('jwt'), "user": user.get('user')}
+            return {"token": user.get('jwt'), "user": user.get('username')}
 
-@bp.route("/", methods=['GET'])
-def Teste():
-    return 'Teste'    
-    
+    else:
+        return {"msg": "User don't exist", "status": "error"}
+
+  
 def configure(app):
     app.register_blueprint(bp)
