@@ -1,61 +1,35 @@
 from flask import Blueprint, request, jsonify
 import json
-from model import db_posts
+from model import database
 
 bp = Blueprint("posts", __name__, url_prefix="/posts")
-db = db_posts()
-
-posts = db.getDb()
+db = database(path="db/posts.json")
 
 
-def saveJson(posts):
-    json_posts = json.dumps(posts)
-    with open('db/posts.json','w') as file:
-        file.write(json_posts)
- 
  
 @bp.route('/',methods=['GET'])
 def getPosts():
-    return jsonify(posts) 
+    return jsonify(db.getData()) 
 
 @bp.route('/<author>', methods=['GET'])
-def getPostsByID(author):
-    matched = []
-    for post in posts:
-        if post.get('author') == author:
-            matched.append(post)    
-            
-    return jsonify(matched)
+def getPostsByAuthor(author):
+     return jsonify(db.getPostsByAuthor(author))
         
         
 @bp.route('/<int:id>', methods=['PUT'])
 def editPost(id):
-    global posts
     new_post = request.get_json()
-    for  index, post in enumerate(posts):
-        if post.get('id') == id:
-            posts[index].update(new_post)
-            posts = db.setDb(posts)
-            return jsonify(posts[index])
+    return jsonify(db.editItem(new_post, id))
 
 @bp.route('/', methods=['POST'])
 def createNewPost():
     global posts
-    post = request.get_json()
-    posts.append(post)
-    posts = db.setDb(posts)
-    
-    return jsonify(posts)
+    post = request.get_json()    
+    return jsonify(db.createNewPost(post))
 
 @bp.route('/<int:id>', methods=['DELETE'])
 def deletePost(id):
-    global posts
-    for index,post in enumerate(posts):
-        if post.get('id') == id:
-            del posts[index]
-    posts = db.setDb(posts)
-    
-    return jsonify(posts)
+    return jsonify(db.DeleteItem(id))
 
 def configure(app):
     app.register_blueprint(bp)

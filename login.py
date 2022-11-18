@@ -1,22 +1,17 @@
 from flask import Blueprint, request, jsonify
-import json
-from flask_cors import CORS
-from model import db_users
+from model import database, authentication
 
 bp = Blueprint("login", __name__, url_prefix="/login")
-db = db_users()
+db = database(path="db/users.json")
+auth = authentication()
+
+
 
 @bp.route("/", methods=['POST'])
 def LoginUser():
     credentials = request.get_json()
-    users = db.getDb()
-    for user in users:
-        if (user.get('email') == credentials['email']) & (user.get('password') == credentials['password']):
-            return {"token": user.get('jwt'), "user": user.get('username')}
-
-    else:
-        return {"msg": "User don't exist", "status": "error"}
-
+    users = db.getData()
+    return auth.validateLogin(credentials,users)
   
 def configure(app):
     app.register_blueprint(bp)
