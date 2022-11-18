@@ -6,7 +6,8 @@ This might help you with the API of the QA App
 ## Project Setup
 
 ```sh
-npm install
+pip install requirements.txt
+```
 
 
 ### Compile and Hot-Reload for Development
