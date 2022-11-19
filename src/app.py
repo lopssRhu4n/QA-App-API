@@ -1,14 +1,16 @@
-from flask_cors import CORS, cross_origin
 from flask import Flask
-import users, posts, login
+from flask_cors import CORS
+import login
+import posts
+import users
 
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/*": {"origins": "*"}})
-    
+    CORS(app, resources={r'/*': {'origins': '*'}})
+
     users.configure(app)
     posts.configure(app)
     login.configure(app)
-     
+
     return app
