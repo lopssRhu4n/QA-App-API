@@ -2,7 +2,7 @@
 
 install: 
 	@poetry install
-
+	
 format: 
 	@blue .
 
