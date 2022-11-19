@@ -8,7 +8,13 @@ packages = [{include = "api_com_python"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+flask="2.2.2"
+flask-cors="3.0.10"
 
+[tool.poetry.dev-dependencies]
+pytest="7.2.0"
+blue="0.9.1"
+prospector="1.7.7"
 
 [build-system]
 requires = ["poetry-core"]
