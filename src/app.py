@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-import login
-import posts
-import users
+import views.login as login
+import views.posts as posts
+import views.users as users
 
 
 def create_app():

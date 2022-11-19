@@ -1,5 +1,11 @@
 .PHONY: install format lint test
 
+run-env:
+	@poetry shell
+
+run-dev: 
+	@flask --app src/app.py --debug run
+
 install: 
 	@poetry install
 	

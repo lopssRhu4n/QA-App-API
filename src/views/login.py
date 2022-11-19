@@ -1,8 +1,8 @@
 from flask import Blueprint, request
-from model import authentication, database
+from model.model import authentication, database
 
 bp = Blueprint('login', __name__, url_prefix='/login')
-db = database(path='db/users.json')
+db = database(path='src/db/users.json')
 auth = authentication()
 
 

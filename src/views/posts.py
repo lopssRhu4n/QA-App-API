@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
-from model import database
+from model.model import database
 
 bp = Blueprint('posts', __name__, url_prefix='/posts')
-db = database(path='db/posts.json')
+db = database(path='src/db/posts.json')
 
 
 @bp.route('/', methods=['GET'])
@@ -15,7 +15,7 @@ def getPostsByAuthor(author):
     return jsonify(db.getPostsByAuthor(author))
 
 
-@bp.route('/<int:id>', methods=['PUT'])
+@bp.route('/<int:post_id>', methods=['PUT'])
 def editPost(post_id):
     new_post = request.get_json()
     return jsonify(db.editItem(new_post, post_id))
@@ -27,7 +27,7 @@ def createNewPost():
     return jsonify(db.createNewPost(post))
 
 
-@bp.route('/<int:id>', methods=['DELETE'])
+@bp.route('/<int:post_id>', methods=['DELETE'])
 def delete_post(post_id):
     return jsonify(db.DeleteItem(post_id))
 
