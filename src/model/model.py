@@ -1,4 +1,5 @@
 import json
+from model.token import create_jwt
 
 
 class database:
@@ -83,6 +84,7 @@ class authentication:
             if (user.get('email') == credentials['email']) & (
                 user.get('password') == credentials['password']
             ):
-                return {'token': user.get('jwt'), 'user': user.get('username')}
+                token = create_jwt(user)
+                return {'token': token, 'user': user.get('username'), 'status': 'success'}
 
             return {'msg': 'Wrong credentials!', 'status': 'error'}

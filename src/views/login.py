@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, make_response, jsonify
 from model.model import authentication, database
 
 bp = Blueprint('login', __name__, url_prefix='/login')
@@ -10,7 +10,11 @@ auth = authentication()
 def LoginUser():
     credentials = request.get_json()
     users = db.getData()
-    return auth.validateLogin(credentials, users)
+    res = auth.validateLogin(credentials, users)
+    if res.get('status') == 'success':
+        return jsonify(res)
+    else:
+        return make_response(jsonify(res), 401)
 
 
 def configure(app):
