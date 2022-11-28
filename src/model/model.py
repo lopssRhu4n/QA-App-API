@@ -2,7 +2,7 @@ import json
 from model.token import create_jwt
 
 
-class database:
+class Database:
     def __init__(self, path):
         self.db = path
 
@@ -75,7 +75,7 @@ class database:
         return matched
 
 
-class authentication:
+class Authentication:
     def __init__(self):
         return
 
@@ -88,3 +88,6 @@ class authentication:
                 return {'token': token, 'user': user.get('username'), 'status': 'success'}
 
             return {'msg': 'Wrong credentials!', 'status': 'error'}
+
+    def logOut():
+        ...

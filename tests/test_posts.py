@@ -1,4 +1,5 @@
 from tests.test_helper import RouteTester
+from pytest import mark
 
 root_url = 'http://localhost:5000/'
 
@@ -18,8 +19,12 @@ payload_post =  {
                  "title": "Test"
             }
 
-def test_users_route_status():
-    assert tester.RouteGetStatus('/') == 200
+@mark.parametrize(
+    'endpoint, status',
+    [('/',200), ('', 308)]
+)
+def test_users_route_status(endpoint, status):
+    assert tester.RouteGetStatus(endpoint) == status
 
 def test_users_by_id_route_status():
     assert tester.RouteGetStatus('/1') == 200

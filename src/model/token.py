@@ -27,7 +27,7 @@ def create_jwt(payload):
  
     return jwt
 
-def verify_and_decode_jwt(jwt):
+def verify_and_decode_jwt(jwt, user):
     b64_header, b64_payload, b64_signature = jwt.split('.')
     b64_signature_checker = base64.urlsafe_b64encode(
         hmac.new(
@@ -42,6 +42,9 @@ def verify_and_decode_jwt(jwt):
 
     if payload.get('exp') and payload['exp'] < unix_time_now:
         raise Exception('Token expirado')
+    
+    if payload.get('user') != user:
+        raise Exception("User doesn't match")
     
     if b64_signature_checker != b64_signature:
         raise Exception('Assinatura inválida')

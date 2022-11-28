@@ -18,3 +18,6 @@ lint:
 
 test:
 	@pytest -v
+
+clear:
+	@pyclean -v

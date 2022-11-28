@@ -1,9 +1,9 @@
 from flask import Blueprint, request, make_response, jsonify
-from model.model import authentication, database
+from model.model import Authentication, Database
 
 bp = Blueprint('login', __name__, url_prefix='/login')
-db = database(path='src/db/users.json')
-auth = authentication()
+db = Database(path='src/db/users.json')
+auth = Authentication()
 
 
 @bp.route('/', methods=['POST'])

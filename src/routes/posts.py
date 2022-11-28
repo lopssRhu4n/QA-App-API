@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
-from model.model import database
+from model.model import Database
 
 bp = Blueprint('posts', __name__, url_prefix='/posts')
-db = database(path='src/db/posts.json')
+db = Database(path='src/db/posts.json')
 
 
 @bp.route('/', methods=['GET'])
