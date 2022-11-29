@@ -13,4 +13,8 @@ def create_app():
     posts.configure(app)
     login.configure(app)
 
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return 'Not found 404 :('
+    
     return app

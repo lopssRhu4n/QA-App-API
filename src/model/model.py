@@ -1,5 +1,5 @@
 import json
-from model.token import create_jwt
+from model.token import create_jwt, verify_and_decode_jwt
 
 
 class Database:
@@ -42,6 +42,7 @@ class Database:
     def createNewItem(self, new_item):
         if self.checksIfUserExists(new_item) is False:
             users = self.getData()
+            new_item['id'] = len(users) + 1
             users.append(new_item)
             return self.setData(users)
         return self.checksIfUserExists(new_item)
@@ -88,6 +89,7 @@ class Authentication:
                 return {'token': token, 'user': user.get('username'), 'status': 'success'}
 
             return {'msg': 'Wrong credentials!', 'status': 'error'}
+        
 
     def logOut():
         ...
