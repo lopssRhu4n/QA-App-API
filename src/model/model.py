@@ -87,9 +87,15 @@ class Authentication:
                 user.get('password') == credentials['password']
             ):
                 token = create_jwt(user)
-                return {'token': token, 'user': user.get('username'), 'status': 'success'}
+                return {
+                    'token': token, 
+                    'user': user.get('username'), 
+                    'userID': user.get('id'), 
+                    'status': 'success'
+                    }
 
-            return {'msg': 'Wrong credentials!', 'status': 'error'}
+            
+        return {'msg': 'Wrong credentials!', 'status': 'error'}
         
 
     def logOut():
