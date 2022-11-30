@@ -49,6 +49,7 @@ class Database:
 
     def createNewPost(self, new_post):
         posts = self.getData()
+        new_post['id'] = len(posts) + 1
         posts.append(new_post)
         return self.setData(posts)
 
