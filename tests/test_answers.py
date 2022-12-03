@@ -23,19 +23,19 @@ payload_post =  {
     'endpoint, status',
     [('/',200), ('', 308)]
 )
-def test_posts_route_status(endpoint, status):
+def test_users_route_status(endpoint, status):
     assert tester.RouteGetStatus(endpoint) == status
 
-def test_posts_by_id_route_status():
+def test_users_by_id_route_status():
     assert tester.RouteGetStatus('/1') == 200
     
-def test_posts_post_status():
+def test_users_post_status():
     assert tester.RoutePostStatus('/', payload_post)
 
-def test_posts_put_status():
+def test_users_put_status():
     assert tester.RoutePutStatus('/5', payload_put) == 200
 
-def test_posts_delete_status():
+def test_users_delete_status():
     assert tester.RouteDeleteStatus('/5')
     
     

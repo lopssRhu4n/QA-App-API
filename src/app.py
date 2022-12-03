@@ -3,6 +3,7 @@ from flask_cors import CORS
 from routes import login
 from routes import posts
 from routes import users
+from routes import answers
 
 
 def create_app():
@@ -12,6 +13,7 @@ def create_app():
     users.configure(app)
     posts.configure(app)
     login.configure(app)
+    answers.configure(app)
 
     @app.errorhandler(404)
     def page_not_found(error):

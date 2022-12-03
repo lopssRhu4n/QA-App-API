@@ -12,13 +12,13 @@ def getPosts():
 
 @bp.route('/<author>', methods=['GET'])
 def getPostsByAuthor(author):
-    return jsonify(db.getPostsByAuthor(author))
+    return jsonify(db.getItemByAuthor(author))
 
 
 @bp.route('/<int:post_id>', methods=['PUT'])
 def editPost(post_id):
-    new_post = request.get_json()
-    return jsonify(db.editItem(new_post, post_id))
+    edited_post = request.get_json()
+    return jsonify(db.editItem(edited_post, post_id))
 
 
 @bp.route('/', methods=['POST'])
@@ -26,6 +26,10 @@ def createNewPost():
     post = request.get_json()
     return jsonify(db.createNewPost(post))
 
+
+# @bp.route('/<int:post_id>/answer', methods=['POST'])
+# def create_new_post_answer(id):
+    
 
 @bp.route('/<int:post_id>', methods=['DELETE'])
 def delete_post(post_id):

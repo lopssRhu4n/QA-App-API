@@ -23,7 +23,7 @@ class Database:
             if item.get('id') == identification:
                 return item
         return 'Item not found'
-
+# Returns index of the item by ID in the Database
     def enumerateItem(self, identification):
         for index, item in enumerate(self.getData()):
             if item.get('id') == identification:
@@ -68,11 +68,11 @@ class Database:
         self.setData(data)
         return data[index]
 
-    def getPostsByAuthor(self, author):
+    def getItemByAuthor(self, author):
         matched = []
-        for post in self.getData():
-            if post.get('author') == author:
-                matched.append(post)
+        for item in self.getData():
+            if item.get('author') == author:
+                matched.append(item)
 
         return matched
 
